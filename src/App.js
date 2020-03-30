@@ -31,10 +31,20 @@ class App extends Component {
   }
 
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      borderRadius: '4px',
+      padding: '8px'
+    };
+
     return (
       <div className="App">
         <h1>React testing</h1>
-        <button onClick={() => this.switchNameHandler('new name') }>Switch name</button>
+        <button 
+          style={style}
+          onClick={() => this.switchNameHandler('new name') }>Switch name</button>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} 
