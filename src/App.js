@@ -14,6 +14,8 @@ class App extends Component {
     ],
     userInput: "",
     count: 0,
+    currentTime: "",
+    setCurrentTime: "",
     showPersons: false
   }
 
@@ -113,6 +115,10 @@ class App extends Component {
           value={this.state.userInput} 
           />
           <p>{this.state.userInput}</p>
+
+          <p>The current time is {this.state.currentTime}.</p>
+          <p>The new time is {this.state.setCurrentTime}.</p>
+
 
         <Validation inputLength={this.state.userInput.length} />
 
