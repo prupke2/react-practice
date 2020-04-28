@@ -19,6 +19,15 @@ class App extends Component {
     showPersons: false
   }
 
+
+  getTime = () => {
+    fetch('/time', {
+      method: 'GET',
+    })
+    .then(results => results.json())
+    .then(data => this.setState({currentTime: data.time}));
+  }
+
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
@@ -71,22 +80,33 @@ class App extends Component {
     });
 
     const appStyle = {
-      background: 'grey',
-      transition: 'background 2s ease'
+      // transition: 'background 2s ease'
     }
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
+      margin: '10px',
       font: 'inherit',
       border: '1px solid blue',
       borderRadius: '4px',
-      padding: '8px'
+      padding: '8px',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }  
     };
 
     const divStyle = {
       backgroundColor: 'darkgrey',
       transition: 'background 4s ease 3s'
     };
+
+    const classes = []
+
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
 
     let persons = null;
 
@@ -103,11 +123,18 @@ class App extends Component {
           })}
         </div> 
       );
+
+      style.backgroundColor = 'red';
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      };
     }
+
 
     return (
       <div className="App" style={appStyle}>
-        <h1>React testing</h1>
+        <h1 className={classes.join(' ')}>React testing</h1>
         Enter letters here: 
         <input 
           type="text"
@@ -116,17 +143,18 @@ class App extends Component {
           />
           <p>{this.state.userInput}</p>
 
-          <p>The current time is {this.state.currentTime}.</p>
-          <p>The new time is {this.state.setCurrentTime}.</p>
-
-
         <Validation inputLength={this.state.userInput.length} />
 
         {charList}
         <hr />
+
         <button 
           style={style}
           onClick={this.togglePersonsHandler}>Switch name</button>
+
+        <button
+          onClick={this.getTime}>Get time</button>
+          <p>Current Time: {this.state.currentTime}</p>
         {persons}
       </div>
     );

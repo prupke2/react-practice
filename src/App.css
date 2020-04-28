@@ -1,5 +1,18 @@
 .App {
   text-align: center;
+  background: black;
+  color: white;
+  transition: background .3s ease;
+
+}
+
+body {
+  background: white;
+}
+
+.App:hover {
+  transition: background .3s ease;
+  background: grey;
 }
 
 .App-logo {
@@ -26,6 +39,14 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.red {
+  background: red;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {
