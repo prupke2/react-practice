@@ -4,6 +4,7 @@ import './App.css';
 import Person from './Person/Person';
 import Validation from './ValidationComponent/Validation';
 import Char from './CharComponent/Char';
+import styled from 'styled-components';
 
 class App extends Component {
   state = {
@@ -15,10 +16,8 @@ class App extends Component {
     userInput: "",
     count: 0,
     currentTime: "",
-    setCurrentTime: "",
     showPersons: false
   }
-
 
   getTime = () => {
     fetch('/time', {
@@ -83,19 +82,19 @@ class App extends Component {
       // transition: 'background 2s ease'
     }
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      margin: '10px',
-      font: 'inherit',
-      border: '1px solid blue',
-      borderRadius: '4px',
-      padding: '8px',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
+    const ButtonStyle = styled.button `
+      background-color: ${props => props.alt ? 'red' : 'green'};
+      color: white;
+      margin: 10px;
+      font: inherit;
+      border: 1px solid blue;
+      border-radius: 4px;
+      padding: 8px;
+      &:hover {
+        background-color: ${props=> props.alt ? 'salmon' : 'lightgreen'};
+        color: black;
       }  
-    };
+    }`;
 
     const divStyle = {
       backgroundColor: 'darkgrey',
@@ -124,39 +123,36 @@ class App extends Component {
         </div> 
       );
 
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
+
     }
 
 
     return (
-      <div className="App" style={appStyle}>
-        <h1 className={classes.join(' ')}>React testing</h1>
-        Enter letters here: 
-        <input 
-          type="text"
-          onChange={this.inputChangedHandler}
-          value={this.state.userInput} 
-          />
-          <p>{this.state.userInput}</p>
+        <div className="App" style={appStyle}>
+          <h1 className={classes.join(' ')}>React testing</h1>
+          Enter letters here: 
+          <input 
+            type="text"
+            onChange={this.inputChangedHandler}
+            value={this.state.userInput} 
+            />
+            <p>{this.state.userInput}</p>
 
-        <Validation inputLength={this.state.userInput.length} />
+          <Validation inputLength={this.state.userInput.length} />
 
-        {charList}
-        <hr />
+          {charList}
+          <hr />
 
-        <button 
-          style={style}
-          onClick={this.togglePersonsHandler}>Switch name</button>
-
-        <button
-          onClick={this.getTime}>Get time</button>
+          <ButtonStyle 
+            alt={this.state.showPersons}
+            onClick={this.togglePersonsHandler}>Switch name</ButtonStyle>
+          <ButtonStyle
+            alt={this.state.currentTime}
+            onClick={this.getTime}>Get time</ButtonStyle>
           <p>Current Time: {this.state.currentTime}</p>
-        {persons}
-      </div>
+          {persons}
+          <p className="test">TEST</p>
+        </div>
     );
   };
 }
