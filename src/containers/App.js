@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Person from './Person/Person';
-import Validation from './ValidationComponent/Validation';
-import Char from './CharComponent/Char';
+import logo from '../assets/logo.svg';
+import '../containers/App.css';
+import Persons from '../components/Persons/Persons';
+import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import Char from '../components/CharComponent/Char';
+import Validation from '../components/ValidationComponent/Validation';
+import Cockpit from '../components/Cockpit/Cockpit';
 import styled from 'styled-components';
 
 class App extends Component {
@@ -19,7 +21,9 @@ class App extends Component {
     showPersons: false
   }
 
+
   getTime = () => {
+    console.log(this.state.persons);
     fetch('/time', {
       method: 'GET',
     })
@@ -82,79 +86,44 @@ class App extends Component {
       // transition: 'background 2s ease'
     }
 
-    const ButtonStyle = styled.button `
-      background-color: ${props => props.alt ? 'red' : 'green'};
-      color: white;
-      margin: 10px;
-      font: inherit;
-      border: 1px solid blue;
-      border-radius: 4px;
-      padding: 8px;
-      &:hover {
-        background-color: ${props=> props.alt ? 'salmon' : 'lightgreen'};
-        color: black;
-      }  
-    }`;
+
 
     const divStyle = {
       backgroundColor: 'darkgrey',
       transition: 'background 4s ease 3s'
     };
 
-    const classes = []
-
-    if (this.state.persons.length <= 2) {
-      classes.push('red');
-    }
-
     let persons = null;
 
     if (this.state.showPersons) {
       persons = (
-        <div style={divStyle}>
-          {this.state.persons.map((person, index) => {
-            return <Person 
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age} 
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)} />
-          })}
-        </div> 
+        <div>
+          <p>hello</p>
+          <Persons 
+            persons = {this.state.persons}
+            clicked = {this.deletePersonHandler}
+            changed = {this.nameChangeHandler} />
+        </div>
       );
-
-
     }
 
 
     return (
         <div className="App" style={appStyle}>
-          <h1 className={classes.join(' ')}>React testing</h1>
-          Enter letters here: 
-          <input 
-            type="text"
-            onChange={this.inputChangedHandler}
-            value={this.state.userInput} 
-            />
-            <p>{this.state.userInput}</p>
-
-          <Validation inputLength={this.state.userInput.length} />
-
-          {charList}
-          <hr />
-
-          <ButtonStyle 
-            alt={this.state.showPersons}
-            onClick={this.togglePersonsHandler}>Switch name</ButtonStyle>
-          <ButtonStyle
-            alt={this.state.currentTime}
-            onClick={this.getTime}>Get time</ButtonStyle>
-          <p>Current Time: {this.state.currentTime}</p>
-          {persons}
-          <p className="test">TEST</p>
+          <Cockpit 
+          inputChanged = {this.inputChangedHandler}
+          userInput = {this.state.userInput}
+          showPersons = {this.state.showPersons}
+          clicked = {this.togglePersonsHandler}
+          persons = {this.state.persons} 
+          currentTime = {this.state.currentTime}
+          getTime = {this.getTime}
+          />
+          <p>{persons}</p>
+          <p>{charList}</p>
         </div>
     );
   };
-}
+};
 
 export default App;

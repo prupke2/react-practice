@@ -19,7 +19,7 @@ const lengthCheck = (props) => {
 		<StyledDiv alt={text}>
 		{
 			props.inputLength > 5 ?
-				<p className="{css.green}">Text long enough</p> :
+				<p className="green">Text long enough</p> :
 				<p>Text too short!</p>
 		}
 		</StyledDiv>
