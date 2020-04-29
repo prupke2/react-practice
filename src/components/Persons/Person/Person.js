@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './Person.css';
 
-const person = (props) => {
-	const style = {
-		'@media (min-width: 500px)': {
-			width: '450px'
-		}
-	};
-
-	return (
-		<div>
-				<div className="{css.Person}">
-					<p>I'm {props.name} and I am {props.age} years old!</p>
-					<p>{props.children}</p>
-					<input type="text" onChange={props.changed} 
-					value={props.name}/>
-					<button className="Button" onClick={props.clicked}>Delete</button>
-				</div>
-		</div>
-	)
+const style = {
+	color: "beige",
+	'@media (minWidth: 500px)': {
+		width: '450px'
+	}
 };
 
-export default person;
+class Person extends Component {
+
+	render() {
+		return (
+			<div>
+					<div className="{css.Person}" style={style}>
+						<p>I'm {this.props.name} and I am {this.props.age} years old!</p>
+						<p>{this.props.children}</p>
+						<input type="text" onChange={this.props.changed} 
+						value={this.props.name}/>
+						<button className="Button" onClick={this.props.clicked}>Delete</button>
+					</div>
+			</div>
+		)
+	};
+}
+
+export default Person;

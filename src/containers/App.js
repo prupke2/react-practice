@@ -9,6 +9,11 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import styled from 'styled-components';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js constructor');
+  }
+
   state = {
     persons: [
       { id: 'asdf', name: 'Jimbo', age: 10},
@@ -21,6 +26,14 @@ class App extends Component {
     showPersons: false
   }
 
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js getDerivedStateFromProps', props);
+    return state;
+  }
+  
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
 
   getTime = () => {
     console.log(this.state.persons);
@@ -75,6 +88,8 @@ class App extends Component {
   }
 
   render() {
+
+    console.log('[App.js] render');
 
     const charList = this.state.userInput.split('').map((char, index) => {
       return <Char character={char} 
