@@ -7,9 +7,19 @@ class Persons extends Component {
 		return state;
 	}
 
+
+	// You can import {PureComponent} instead of {Component} to get the same result
 	shouldComponentUpdate(nextProps, nextState) {
 		console.log('[Persons.js] shouldComponentUpdate');
-		return true;
+		if (
+			nextProps.persons !== this.props.persons ||
+			nextProps.changed !== this.props.changed ||
+			nextProps.clicked !== this.props.clicked
+		) { 
+			return true;
+		} else {
+			return false;
+		} 
 	}
 
 	componentDidUpdate() {

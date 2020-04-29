@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Validation from '../ValidationComponent/Validation';
 import './cockpit.css';
 import styled from 'styled-components';
@@ -18,19 +18,20 @@ const ButtonStyle = styled.button `
   }  
 }`;
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
 
- //    let persons = null;
+	useEffect(() => {
+		console.log('[Cockpit.js] useEffect');
+		// Https request, etc.
 
-	// if (props.showPersons) {
-	// 	persons = 
-	// 		<Persons 
-	// 			persons = {props.persons}
-	// 			clicked = {props.deletePersonHandler}
-	// 			changed = {props.nameChangeHandler} 
-	// 		/>;
-
-	// }
+		const timer = setTimeout(() => {
+			console.log("useEffect has run!");
+		}, 1000);
+		// returns are optional in useEffect() but can be used to clean up and improve performance
+		return () => {
+			clearTimeout(timer);
+		}
+	}, []);
 
 	return (
 		<div className="cockpit">
@@ -63,4 +64,6 @@ const cockpit = (props) => {
     )
 }
 
-export default cockpit;
+// wrapping the export with React.memo stores a snapshot of the component
+// so that it will only re-render if something changes
+export default React.memo(Cockpit);

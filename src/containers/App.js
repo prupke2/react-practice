@@ -113,7 +113,6 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <p>hello</p>
           <Persons 
             persons = {this.state.persons}
             clicked = {this.deletePersonHandler}
@@ -130,7 +129,6 @@ class App extends Component {
           userInput = {this.state.userInput}
           showPersons = {this.state.showPersons}
           clicked = {this.togglePersonsHandler}
-          persons = {this.state.persons} 
           currentTime = {this.state.currentTime}
           getTime = {this.getTime}
           />
